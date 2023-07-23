@@ -1,0 +1,5 @@
+Project will aim to recommend a user with other episodes of the same show that they might like based on an episode that they enjoyed.
+Works best for shows with a lot of episodes with contained plots.
+
+Uses scikit-learn's TfidfVectorizer to vectorize the text of each episode's plot summary or scripts, clusters via K-means, 
+and then uses cosine similarity to find the most similar episodes based on said clusters.
