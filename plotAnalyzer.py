@@ -65,5 +65,38 @@ plots = [episodes["plot"] for episodes in episodes]
 
 
 cleaned_plots = clean_text(plots)
-print(plots[0])
-print(cleaned_plots[0])
+
+
+vectorizer = TfidfVectorizer(lowercase=True,
+                             max_features=100,  # max number of words to keep
+                             max_df=0.8,  # ignore words that appear in more than 80% of the documents
+                             min_df=5,  # ignore words that appear in less than 5 documents
+                             # unigrams, bigrams, and trigrams
+                             ngram_range=(1, 3),
+                             stop_words='english'  # remove stop words again just in case
+                             )
+
+
+vectors = vectorizer.fit_transform(cleaned_plots)
+
+feature_names = vectorizer.get_feature_names_out()
+
+print(feature_names)
+
+dense = vectors.todense()
+dense_list = dense.tolist()
+
+# stores keywords for each episode's plot
+allKeywords = []
+
+# out of the main feature words that vectorizer found, which ones are in each episode's plot?
+# stores them per and for each episode
+for desc in dense_list:
+    x = 0
+    keywords = []
+    for word in desc:
+        if word > 0:
+            keywords.append(feature_names[x])
+        x += 1
+
+    allKeywords.append(keywords)
