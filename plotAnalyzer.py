@@ -31,7 +31,7 @@ def remove_stops(text, stops):
     words = text.split()
     cleaned = []
     for word in words:
-        if word not in stops:
+        if word.lower() not in stops:
             cleaned.append(word)
 
     cleaned = " ".join(cleaned)
@@ -48,6 +48,9 @@ def remove_stops(text, stops):
 # customize stop words to be removed
 def clean_text(plots):
     stops = stopwords.words("english")
+    stops += ["raj", "leonard", "howard", "penny", "bernadette", "sheldon", "stuart", "amy",
+              "koothrappali", "wolowitz", "hofstadter", "cooper", "fowler", "rostenkowski", "bloom"]
+    print(stops)
     final = []
 
     # cleans each episode's plot and appends to final list
@@ -69,8 +72,8 @@ cleaned_plots = clean_text(plots)
 
 vectorizer = TfidfVectorizer(lowercase=True,
                              max_features=100,  # max number of words to keep
-                             max_df=0.8,  # ignore words that appear in more than 80% of the documents
-                             min_df=5,  # ignore words that appear in less than 5 documents
+                             max_df=0.3,  # ignore words that appear in more than 80% of the documents
+                             min_df=1,  # ignore words that appear in less than 5 documents
                              # unigrams, bigrams, and trigrams
                              ngram_range=(1, 3),
                              stop_words='english'  # remove stop words again just in case
@@ -100,3 +103,27 @@ for desc in dense_list:
         x += 1
 
     allKeywords.append(keywords)
+
+
+### K-Means Clustering ###
+
+cluster_num = 20
+
+# clusters descriptions into 20 clusters
+model = KMeans(n_clusters=cluster_num,
+               init='k-means++', max_iter=100, n_init=1)
+model.fit(vectors)
+
+
+order_centroids = model.cluster_centers_.argsort()[:, ::-1]
+terms = vectorizer.get_feature_names_out()
+
+
+with open("clusters.txt", "w", encoding="utf-8") as f:
+    for i in range(cluster_num):
+        f.write("Cluster %d:" % i)
+
+        # finds the top 10 words in each cluster
+        for ind in order_centroids[i, :10]:
+            f.write(' %s' % terms[ind])
+        f.write('\n\n')
