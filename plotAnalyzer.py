@@ -66,7 +66,8 @@ def clean_text(plots):
 
 episodes = load_data("plots.json")
 
-names = [episodes["Title"] for episodes in episodes]
+names = [str(episodes["Season"]) + ";" + str(episodes["No. inseason"])
+         for episodes in episodes]
 plots = [episodes["plot"] for episodes in episodes]
 
 episodes_data = {}
@@ -97,7 +98,6 @@ for i in range(len(episodes_array)):
     episodes_array[i] = episodes_array[i].replace("  ", " ")
     plots[i] = plots[i] + " " + episodes_array[i]
 
-print(episodes_array[0])
 
 cleaned_plots = clean_text(plots)
 
@@ -115,8 +115,6 @@ vectorizer = TfidfVectorizer(lowercase=True,
 vectors = vectorizer.fit_transform(cleaned_plots)
 
 feature_names = vectorizer.get_feature_names_out()
-
-print(feature_names)
 
 dense = vectors.todense()
 dense_list = dense.tolist()
