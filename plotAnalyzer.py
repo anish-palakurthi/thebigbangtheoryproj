@@ -33,8 +33,13 @@ def remove_stops(text, stops):
     words = text.split()
     cleaned = []
     for word in words:
-        if word.lower() not in stops:
+        if word.lower() in stops or word[-2:].lower() == "'s":
+            continue
+        else:
+            print(word)
             cleaned.append(word)
+
+    print(cleaned)
 
     cleaned = " ".join(cleaned)
 
@@ -109,7 +114,7 @@ for desc in dense_list:
 
 # K-Means Clustering ### -- limits each desc to one cluster/topic -- LDA will improve this
 
-cluster_num = 20
+cluster_num = 5
 
 # clusters descriptions into 20 clusters
 model = KMeans(n_clusters=cluster_num,
