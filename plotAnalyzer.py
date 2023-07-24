@@ -8,8 +8,10 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 from sklearn.metrics import adjusted_rand_score
+from sklearn.decomposition import PCA
 import string
 from nltk.corpus import stopwords
+import matplotlib.pyplot as plt
 
 
 def load_data(file):
@@ -72,8 +74,8 @@ cleaned_plots = clean_text(plots)
 
 vectorizer = TfidfVectorizer(lowercase=True,
                              max_features=100,  # max number of words to keep
-                             max_df=0.3,  # ignore words that appear in more than 80% of the documents
-                             min_df=1,  # ignore words that appear in less than 5 documents
+                             max_df=0.8,  # ignore words that appear in more than 80% of the documents
+                             min_df=5,  # ignore words that appear in less than 5 documents
                              # unigrams, bigrams, and trigrams
                              ngram_range=(1, 3),
                              stop_words='english'  # remove stop words again just in case
@@ -105,7 +107,7 @@ for desc in dense_list:
     allKeywords.append(keywords)
 
 
-### K-Means Clustering ###
+# K-Means Clustering ### -- limits each desc to one cluster/topic -- LDA will improve this
 
 cluster_num = 20
 
@@ -127,3 +129,28 @@ with open("clusters.txt", "w", encoding="utf-8") as f:
         for ind in order_centroids[i, :10]:
             f.write(' %s' % terms[ind])
         f.write('\n\n')
+
+
+### PCA ###
+
+kmean_indices = model.fit_predict(vectors)
+pca = PCA(n_components=2)
+scatter_plot_points = pca.fit_transform(vectors.toarray())
+
+
+colors = ["r", "b", "g", "c", "m", "y", "k", "w", "orange", "purple", "pink",
+          "brown", "gray", "olive", "cyan", "lime", "teal", "navy", "maroon", "gold"]
+
+x_axis = [o[0] for o in scatter_plot_points]
+y_axis = [o[1] for o in scatter_plot_points]
+
+
+fig, ax = plt.subplots(figsize=(50, 50))
+ax.scatter(x_axis, y_axis, c=[colors[d] for d in kmean_indices])
+
+
+for i, txt in enumerate(names):
+    ax.annotate(txt[0:5], (x_axis[i], y_axis[i]))
+
+
+plt.savefig("clusters.png")
