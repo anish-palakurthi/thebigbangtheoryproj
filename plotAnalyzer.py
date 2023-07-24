@@ -36,10 +36,7 @@ def remove_stops(text, stops):
         if word.lower() in stops or word[-2:].lower() == "'s":
             continue
         else:
-            print(word)
             cleaned.append(word)
-
-    print(cleaned)
 
     cleaned = " ".join(cleaned)
 
@@ -57,7 +54,6 @@ def clean_text(plots):
     stops = stopwords.words("english")
     stops += ["raj", "leonard", "howard", "penny", "bernadette", "sheldon", "stuart", "amy",
               "koothrappali", "wolowitz", "hofstadter", "cooper", "fowler", "rostenkowski", "bloom"]
-    print(stops)
     final = []
 
     # cleans each episode's plot and appends to final list
@@ -73,6 +69,35 @@ episodes = load_data("plots.json")
 names = [episodes["Title"] for episodes in episodes]
 plots = [episodes["plot"] for episodes in episodes]
 
+episodes_data = {}
+
+data = load_data("scripts.json")
+
+
+for line in data:
+    episode_title = line["episode_name"]
+    script_line = line["dialogue"]
+
+    if episode_title not in episodes_data:
+        episodes_data[episode_title] = ""
+
+    episodes_data[episode_title] += script_line + " "
+
+episodes_array = []
+# Iterate through the episodes_data dictionary and extract the script lines
+for lines in episodes_data.values():
+    # Combine all script lines into a single string for each episode
+    episode_string = "".join(lines)
+    episodes_array.append(episode_string)
+
+
+for i in range(len(episodes_array)):
+    episodes_array[i] = episodes_array[i].replace("\\n", " ")
+    episodes_array[i] = episodes_array[i].replace("\\", "")
+    episodes_array[i] = episodes_array[i].replace("  ", " ")
+    plots[i] = plots[i] + " " + episodes_array[i]
+
+print(episodes_array[0])
 
 cleaned_plots = clean_text(plots)
 
