@@ -63,7 +63,7 @@ def clean_text(plots):
 
 
 # loads descriptions of episodes
-episodes = load_data("plots.json")
+episodes = load_data("data/plots.json")
 
 # episode titles in the form of "Season;Episode"
 names = [str(episode["Season"]) + ";" + str(episode["No. inseason"])
@@ -83,7 +83,7 @@ summaries = [str(episode["Season"]) + ";" + str(episode["No. inseason"]
 
 # loads episode scripts
 episodes_data = {}
-data = load_data("scripts.json")
+data = load_data("data/scripts.json")
 
 for line in data:
     episode_title = line["episode_name"]
