@@ -5,6 +5,7 @@ import re
 import glob
 import json
 import pandas as pd
+import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 from sklearn.metrics import adjusted_rand_score
@@ -12,6 +13,7 @@ from sklearn.decomposition import PCA
 import string
 from nltk.corpus import stopwords
 import matplotlib.pyplot as plt
+from sklearn.metrics.pairwise import cosine_similarity
 
 
 def load_data(file):
@@ -138,7 +140,7 @@ for desc in dense_list:
 
 # K-Means Clustering ### -- limits each desc to one cluster/topic -- LDA will improve this
 
-cluster_num = 5
+cluster_num = 10
 
 # clusters descriptions into 20 clusters
 model = KMeans(n_clusters=cluster_num,
@@ -172,3 +174,13 @@ for i, txt in enumerate(names):
 
 
 plt.savefig("clusters.png")
+
+
+target_vector = vectors[0]
+sims = cosine_similarity(target_vector, vectors)
+closestFive = np.argsort(sims)[0][-6:-1]
+
+for i in range(5):
+    print(names[closestFive[i]])
+    print(plots[closestFive[i]])
+    print("\n")
