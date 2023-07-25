@@ -114,6 +114,7 @@ vectorizer = TfidfVectorizer(lowercase=True,
 
 vectors = vectorizer.fit_transform(cleaned_plots)
 
+
 feature_names = vectorizer.get_feature_names_out()
 
 dense = vectors.todense()
@@ -147,17 +148,6 @@ model.fit(vectors)
 
 order_centroids = model.cluster_centers_.argsort()[:, ::-1]
 terms = vectorizer.get_feature_names_out()
-
-
-with open("clusters.txt", "w", encoding="utf-8") as f:
-    for i in range(cluster_num):
-        f.write("Cluster %d:" % i)
-
-        # finds the top 10 words in each cluster
-        for ind in order_centroids[i, :10]:
-            f.write(' %s' % terms[ind])
-        f.write('\n\n')
-
 
 ### PCA ###
 
