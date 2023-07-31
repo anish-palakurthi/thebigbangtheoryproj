@@ -18,7 +18,7 @@ This project involves using K-means clustering and LDA (Latent Dirichlet Allocat
 
 ## Description
 
-"The Big Bang Theory" is a popular TV show known for its witty and humorous dialogue. In this project, we leverage K-means clustering to group similar scripts and LDA to extract underlying topics from the episodes. By combining these techniques, we create an unsupervised model that can discover patterns and relationships within the dialogue data, which we can leverage to recommend episodes to a user that they may enjoy based on their input.
+"The Big Bang Theory" is a popular (the best) TV show known for its witty dialogue and humorous relationships. In this project, we leverage K-means clustering to group similar scripts and LDA to extract underlying topics from the episodes. By combining these techniques, we create an unsupervised model that can discover patterns and relationships within the dialogue data, which we can leverage to recommend episodes to a user that they may enjoy based on their input. As someone who has seen all 12 seasons of this show 3 times, I wanted to be able to find my favorite episodes to rewatch without having to restart the series.
 
 ## Installation
 
@@ -43,8 +43,8 @@ pip install -r requirements.txt
 
 We present the following results from our analysis:
 
-- Identified and visualized X distinct clusters of episodes based on dialogue patterns.
-- Extracted Y latent topics, such as "science jokes," "relationship humor," and "geek culture," providing a deeper understanding of the content.
+- Identified and visualized distinct clusters of episodes based on dialogue patterns.
+- Extracted latent topics, such as "science jokes," "relationship humor," and "geek culture," providing a deeper understanding of the content.
 - Successfully generated episode recommendations for users, showcasing the practicality of the unsupervised model.
 
 ## Contributing
