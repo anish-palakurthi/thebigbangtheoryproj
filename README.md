@@ -24,9 +24,11 @@ This project involves using K-means clustering and LDA (Latent Dirichlet Allocat
 
 To use this project, you'll need to have Python installed. Clone this repository and install the required dependencies using the following commands:
 
-```git clone https://github.com/your_username/thebigbangtheoryproj.git
+```
+git clone https://github.com/your_username/thebigbangtheoryproj.git
 cd your_project_path
-pip install -r requirements.txt```
+pip install -r requirements.txt
+```
 
 
 ## Usage
