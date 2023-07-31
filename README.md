@@ -1,12 +1,12 @@
-# Project Title
+# The Big Bang Theory NLP Episode Recommender
 
 ## Overview
 
-This project involves using K-means clustering and LDA (Latent Dirichlet Allocation) to train an unsupervised model on the scripts of the TV show "The Big Bang Theory." The main objective is to model topics in episodes and facilitate user episode recommendations.
+This project involves using K-means clustering and LDA (Latent Dirichlet Allocation) to train an unsupervised model on the scripts of the (greatest) TV show "The Big Bang Theory." The main objective is to model topics in episodes and facilitate user episode recommendations.
 
 ## Table of Contents
 
-- [Project Title](#project-title)
+- [The Big Bang Theory NLP Episode Recommender](#the-big-bang-theory-nlp-episode-recommender)
   - [Overview](#overview)
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
