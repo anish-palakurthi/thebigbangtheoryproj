@@ -18,7 +18,7 @@ This project involves using K-means clustering and LDA (Latent Dirichlet Allocat
 
 ## Description
 
-"The Big Bang Theory" is a popular TV show known for its witty and humorous dialogue. In this project, we leverage K-means clustering to group similar scripts and LDA to extract underlying topics from the episodes. By combining these techniques, we create an unsupervised model that can discover patterns and relationships within the dialogue data.
+"The Big Bang Theory" is a popular TV show known for its witty and humorous dialogue. In this project, we leverage K-means clustering to group similar scripts and LDA to extract underlying topics from the episodes. By combining these techniques, we create an unsupervised model that can discover patterns and relationships within the dialogue data, which we can leverage to recommend episodes to a user that they may enjoy based on their input.
 
 ## Installation
 
@@ -34,7 +34,8 @@ pip install -r requirements.txt
 ## Usage
 
 1. Make sure you have installed all the dependencies as mentioned in the installation section.
-2. Run kclustering.py to perform K-means clustering and lda.py to conduct LDA analysis on the scripts data (generally more accurate as LDA allows for multiple topics per episode but requires slightly more training time.)
+2. Run ```kclustering.py``` to perform K-means clustering and ```lda.py``` to conduct LDA analysis on the scripts data,
+   1. LDA processing can take significantly longer than K-means clustering but allows for increased recommendation robustness as it includes multiple topical distributions per episode rather than classifying them under cut lines.
 3. Explore the discovered topics and cluster assignments to gain insights into the episodes.
 4. Use the generated model to recommend episodes to users based on their interests.
 
@@ -42,13 +43,14 @@ pip install -r requirements.txt
 
 We present the following results from our analysis:
 
-- Identified X distinct clusters of episodes based on dialogue patterns.
+- Identified and visualized X distinct clusters of episodes based on dialogue patterns.
 - Extracted Y latent topics, such as "science jokes," "relationship humor," and "geek culture," providing a deeper understanding of the content.
 - Successfully generated episode recommendations for users, showcasing the practicality of the unsupervised model.
 
 ## Contributing
 
-Contributions to this project are welcome! If you find any issues or have ideas to enhance the model's performance, please feel free to open an issue or submit a pull request. We appreciate your input!
+Contributions to this project are welcome! If you find any issues or have ideas to enhance the model's performance, please feel free to open an issue or submit a pull request. I appreciate your input!
+This project can easily be expanded to any other television show, song lyrics, etc. Edit the json files or adjust how data is loaded into the model as you see fit!
 
 ## License
 
